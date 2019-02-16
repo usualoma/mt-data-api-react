@@ -1,4 +1,5 @@
 import moment from "moment";
+import {transform} from "@babel/standalone";
 
 var inputEl = document.getElementById("template");
 var outputEl = document.getElementById("result");
@@ -14,7 +15,7 @@ dataApiUrlEl
 targetEl.setAttribute("data-api-url", dataApiUrlEl.value);
 
 var currentName = null;
-function transform() {
+function _transform() {
   try {
     if (currentName) {
       delete window[currentName];
@@ -22,7 +23,7 @@ function transform() {
     currentName =
       "mtDataApiTemplate_" + moment().format("YYYYMMDDhhmmss");
 
-    var code = Babel.transform(
+    var code = transform(
       "<React.Fragment>" + (inputEl.value || inputEl.innerHTML) + "</React.Fragment>",
       {
         presets: ["es2015", "react", "stage-0"],
@@ -44,7 +45,7 @@ function transform() {
     outputEl.innerHTML = "ERROR: " + ex.message;
   }
 }
-transform();
+_transform();
 inputEl.addEventListener("input", function(ev) {
-  transform();
+  _transform();
 });
