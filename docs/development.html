@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
+      integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"
+      integrity="sha256-FiZMk1zgTeujzf/+vomWZGZ9r00+xnGvOgXoj0Jo1jA="
+      crossorigin="anonymous"
+    ></script>
+
+    <title>Development - MT Data API React</title>
+  </head>
+  <body style="padding-top: 5em">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#">MT Data API React</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarsExampleDefault"
+        aria-controls="navbarsExampleDefault"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/docs/development.html"
+              >Payground</a
+            >
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/docs/development.html">Development <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/docs/production.html">Production</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col">
+          <form>
+            <div class="form-group row">
+              <label for="data-api-url" class="col-auto col-form-label"
+                >Data API URL</label
+              >
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="data-api-url"
+                  placeholder="https://example.movabletype.io/.data-api/v4/sites/12345"
+                  value="https://tamano-20181219.movabletype.io/.data-api/v4/sites/60293"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <textarea style="height: 500px" class="form-control">
+<script src="........../dist/main.js?hash=8911c8c"></script>
+<script src="........../dist/repl.js?hash=8911c8c"></script>
+
+<div data-api-url="" data-mt-data-api-render-template="#src"></div>
+<script id="src" type="text/jsx">
+<h1>Index</h1>
+<ul className="list-unstyled">
+  <MT.Entries>
+    <li id={(<MT.EntryId />)} className="media">
+      <MT.EntryAssets limit="1">
+        <img src={<MT.AssetThumbnailUrl width="200" />} />
+      </MT.EntryAssets>
+      <div className="media-body">
+        <a href={(<MT.EntryPermalink />)} className="text-body">
+          <h5 className="mt-0 mb-1">{(<MT.EntryTitle />)}</h5>
+        </a>
+        <p><MT.EntryExcerpt/></p>
+      </div>
+    </li>
+  </MT.Entries>
+</ul>
+</script>
+</textarea>
+
+        </div>
+
+        <div class="col-md-6">
+          <div data-mt-data-api-render-template=""></div>
+<script id="template" type="text/jsx">
+<h1>Index</h1>
+<ul className="list-unstyled">
+  <MT.Entries>
+    <li id={(<MT.EntryId />)} className="media">
+      <MT.EntryAssets limit="1">
+        <img src={<MT.AssetThumbnailUrl width="200" />} />
+      </MT.EntryAssets>
+      <div className="media-body">
+        <a href={(<MT.EntryPermalink />)} className="text-body">
+          <h5 className="mt-0 mb-1">{(<MT.EntryTitle />)}</h5>
+        </a>
+        <p><MT.EntryExcerpt/></p>
+      </div>
+    </li>
+  </MT.Entries>
+</ul>
+</script>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col">
+          <textarea
+            id="result"
+            style="height: 10em"
+            class="form-control"
+          ></textarea>
+        </div>
+      </div>
+    </main>
+
+    <script src="../dist/main.js?hash=8911c8c"></script>
+    <script>
+      var inputEl = document.getElementById("template");
+      var outputEl = document.getElementById("result");
+      var targetEl = document.querySelector(
+        "[data-mt-data-api-render-template]"
+      );
+
+      var dataApiUrlEl = document.getElementById("data-api-url");
+      dataApiUrlEl
+        .addEventListener("change", function(ev) {
+          targetEl.setAttribute("data-api-url", dataApiUrlEl.value);
+        });
+      targetEl.setAttribute("data-api-url", dataApiUrlEl.value);
+
+      var currentName = null;
+      function transform() {
+        try {
+          if (currentName) {
+            delete window[currentName];
+          }
+          currentName =
+            "mtDataApiTemplate_" + moment().format("YYYYMMDDhhmmss");
+
+          var code = Babel.transform(
+            "<React.Fragment>" + inputEl.innerHTML + "</React.Fragment>",
+            {
+              presets: ["es2015", "react", "stage-0"],
+            }
+          ).code;
+
+          code =
+            code.replace(
+              /"use strict";\s*/,
+              "window." + currentName + " = function(opts) { var React = opts.React; var MT = opts.MT; return "
+            ) + " }";
+
+          outputEl.value = code;
+
+          eval(code);
+
+          targetEl.setAttribute("data-mt-data-api-render-template", currentName);
+        } catch (ex) {
+          outputEl.innerHTML = "ERROR: " + ex.message;
+        }
+      }
+      transform();
+      inputEl.addEventListener("input", function(ev) {
+        transform();
+      });
+    </script>
+  </body>
+</html>
