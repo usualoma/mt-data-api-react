@@ -4,60 +4,47 @@ import App from "./App";
 import domready from "domready";
 import MT from "./MT";
 
-//global.React = React;
-//global.MT = MT;
-
-//domready(() => {
-//  const inputEl = document.getElementById("src");
-//  const outputEl = document.getElementById("out");
-//  const src = inputEl.value;
-//
-//  function transform() {
-//    try {
-//      outputEl.innerHTML = global.Babel.transform("<div>" + inputEl.value + '</div>', {
-//        presets: ['es2015', 'react', 'stage-0']
-//      }).code;
-//
-//      const elm = document.getElementById("app");
-//      ReactDOM.render(
-//        <MT apiUrl={elm.dataset.apiUrl}>{eval(outputEl.innerHTML)}</MT>,
-//        elm
-//      );
-//    } catch (ex) {
-//      outputEl.innerHTML = 'ERROR: ' + ex.message;
-//    }
-//  }
-//  inputEl.addEventListener('keyup', transform, false);
-//  transform();
-//});
-
-//domready(() => {
-//  const inputEl = document.getElementById("src");
-//  const outputEl = document.getElementById("out");
-//  const src = inputEl.value;
-//
-//  function transform() {
-//    try {
-//      outputEl.innerHTML = global.Babel.transform("<React.Fragment>" + inputEl.innerHTML + '</React.Fragment>', {
-//        presets: ['es2015', 'react', 'stage-0']
-//      }).code;
-//
-//      const elm = document.getElementById("app");
-//      ReactDOM.render(
-//        <MT apiUrl={elm.dataset.apiUrl}>{eval(outputEl.innerHTML)}</MT>,
-//        elm
-//      );
-//    } catch (ex) {
-//      outputEl.innerHTML = 'ERROR: ' + ex.message;
-//    }
-//  }
-//  transform();
-//});
-
 domready(() => {
-  const elm = document.getElementById("app");
-  ReactDOM.render(
-    <MT apiUrl={elm.dataset.apiUrl}>{window[elm.dataset.template]()}</MT>,
-    elm
-  );
+  if (typeof document === "undefined") {
+    return;
+  }
+
+  const elms = document.querySelectorAll("[data-mt-data-api-render-template]");
+  Array.prototype.slice.call(elms, 0).forEach(elm => {
+    const render = () => {
+      const getElements = global[elm.dataset.mtDataApiRenderTemplate];
+
+      if (typeof getElements !== "function") {
+        return;
+      }
+
+      const apiUrl = elm.dataset.apiUrl;
+
+      if (!apiUrl) {
+        return;
+      }
+
+      ReactDOM.render(
+        <MT apiUrl={apiUrl}>
+          {getElements({
+            MT,
+            React,
+          })}
+        </MT>,
+        elm
+      );
+    };
+    render();
+
+    if (typeof MutationObserver === "undefined") {
+      return;
+    }
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        render();
+      });
+    });
+    observer.observe(elm, {attributes: true});
+  });
 });

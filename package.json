@@ -1,5 +1,5 @@
 {
-  "name": "mt-entries",
+  "name": "mt-data-api-react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -26,6 +26,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@babel/standalone": "^7.3.3"
+    "@babel/standalone": "^7.3.3",
+    "webpack-cli": "^3.2.3"
   }
 }
