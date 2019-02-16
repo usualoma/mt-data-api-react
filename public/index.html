@@ -9,9 +9,31 @@
     />
     <meta name="theme-color" content="#000000" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha256-azvvU9xKluwHFJ0Cpgtf0CYzK7zgtOznnzxV4924X1w=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js" integrity="sha256-FiZMk1zgTeujzf/+vomWZGZ9r00+xnGvOgXoj0Jo1jA=" crossorigin="anonymous"></script>
     <title>mt-entries</title>
   </head>
   <body>
+
     <div id="app" data-api-url="https://tamano-20181219.movabletype.io/.data-api/v4/sites/60293"></div>
+    <script id="src" type="text/jsx">
+<h1>Index</h1>
+<ul className="list-unstyled">
+  <MT.Entries>
+    <li id={(<MT.EntryId />)} className="media">
+      <MT.EntryAssets limit="1">
+        <img src={<MT.AssetThumbnailUrl width="200" />} />
+      </MT.EntryAssets>
+      <div className="media-body">
+        <a href={(<MT.EntryPermalink />)} className="text-body">
+          <h5 className="mt-0 mb-1">{(<MT.EntryTitle />)}</h5>
+        </a>
+        <p><MT.EntryExcerpt/></p>
+      </div>
+    </li>
+  </MT.Entries>
+</ul>
+    </script>
+
+    <textarea id="out"></textarea>
   </body>
 </html>
