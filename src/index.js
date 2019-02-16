@@ -32,24 +32,10 @@ global.MT = MT;
 //});
 
 domready(() => {
-  const inputEl = document.getElementById("src");
-  const outputEl = document.getElementById("out");
-  const src = inputEl.value;
-
-  function transform() {
-    try {
-      outputEl.innerHTML = global.Babel.transform("<MT.Fragment>" + inputEl.innerHTML + '</MT.Fragment>', {
-        presets: ['es2015', 'react', 'stage-0']
-      }).code;
-
-      const elm = document.getElementById("app");
-      ReactDOM.render(
-        <MT apiUrl={elm.dataset.apiUrl}>{eval(outputEl.innerHTML)}</MT>,
-        elm
-      );
-    } catch (ex) {
-      outputEl.innerHTML = 'ERROR: ' + ex.message;
-    }
-  }
-  transform();
+  const elm = document.getElementById("app");
+  console.log(window[elm.dataset.template]);
+  ReactDOM.render(
+    <MT apiUrl={elm.dataset.apiUrl}>{window[elm.dataset.template]()}</MT>,
+    elm
+  );
 });
