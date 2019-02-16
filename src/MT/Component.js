@@ -34,7 +34,7 @@ class Component extends React.Component {
           let wrap = null;
   			  Object.keys(child.props).forEach((k) => {
             const p = child.props[k];
-            if (typeof p !== "object" || !p.type || !p.type.toString().match(/ MT/)) {
+            if (typeof p !== "object" || !p.type || typeof p.type !== 'function' || !p.type.prototype instanceof MT.Component) {
               return;
             }
 

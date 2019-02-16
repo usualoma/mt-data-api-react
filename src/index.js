@@ -33,7 +33,6 @@ global.MT = MT;
 
 domready(() => {
   const elm = document.getElementById("app");
-  console.log(window[elm.dataset.template]);
   ReactDOM.render(
     <MT apiUrl={elm.dataset.apiUrl}>{window[elm.dataset.template]()}</MT>,
     elm
