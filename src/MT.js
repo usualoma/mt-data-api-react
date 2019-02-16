@@ -6,6 +6,8 @@ function MT({ children, apiUrl }) {
   return (<MT.ApiContext.Provider value={{apiUrl}}>{children}</MT.ApiContext.Provider>);
 }
 
+MT.Fragment = ({children}) => children;
+
 MT.Component = Component;
 MT.Context = createContext(null);
 MT.AssetContext = createContext(null);
