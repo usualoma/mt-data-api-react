@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { createContext, useContext } from "react";
+import React from "react";
 import MT from "../MT";
 
 class MTEntries extends MT.Component {

@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
 import domready from "domready";
 import MT from "./MT";
+import "./MT/Tags";
 
 domready(() => {
   if (typeof document === "undefined") {
@@ -40,11 +40,11 @@ domready(() => {
       return;
     }
 
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
+    const observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
         render();
       });
     });
-    observer.observe(elm, {attributes: true});
+    observer.observe(elm, { attributes: true });
   });
 });

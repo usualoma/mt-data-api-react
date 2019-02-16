@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, {useState, useEffect, useContext} from "react";
+import React, {useState, useEffect} from "react";
 import MT from "../MT";
 
 const Handler = ({asset, width, height, render}) => {

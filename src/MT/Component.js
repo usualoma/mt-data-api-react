@@ -1,5 +1,4 @@
-import React, {useContext} from "react";
-import ReactDOMServer from 'react-dom/server';
+import React from "react";
 import MT from "../MT";
 
 function recursiveMap(children, fn) {
@@ -26,10 +25,6 @@ class Component extends React.Component {
           return child;
     
         case "object":
-  			  const newProps = {};
-          const currentContext = useContext(MT.Context);
-          const assetContext = useContext(MT.AssetContext);
-
           let wrapk = null;
           let wrap = null;
   			  Object.keys(child.props).forEach((k) => {
