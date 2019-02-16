@@ -1,5 +1,9 @@
 module.exports = {
   mode: "production",
+  entry: {
+    main: './src/index.js',
+    repl: './src/repl.js'
+  },
   module: {
     rules: [
       {

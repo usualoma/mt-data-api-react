@@ -16,17 +16,6 @@
       crossorigin="anonymous"
     />
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
-      integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ="
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"
-      integrity="sha256-FiZMk1zgTeujzf/+vomWZGZ9r00+xnGvOgXoj0Jo1jA="
-      crossorigin="anonymous"
-    ></script>
-
     <title>Development - MT Data API React</title>
   </head>
   <body style="padding-top: 5em">
@@ -147,55 +136,11 @@
     </main>
 
     <script src="../dist/main.js?hash=ce73cf1"></script>
-    <script>
-      var inputEl = document.getElementById("template");
-      var outputEl = document.getElementById("result");
-      var targetEl = document.querySelector(
-        "[data-mt-data-api-render-template]"
-      );
-
-      var dataApiUrlEl = document.getElementById("data-api-url");
-      dataApiUrlEl
-        .addEventListener("change", function(ev) {
-          targetEl.setAttribute("data-api-url", dataApiUrlEl.value);
-        });
-      targetEl.setAttribute("data-api-url", dataApiUrlEl.value);
-
-      var currentName = null;
-      function transform() {
-        try {
-          if (currentName) {
-            delete window[currentName];
-          }
-          currentName =
-            "mtDataApiTemplate_" + moment().format("YYYYMMDDhhmmss");
-
-          var code = Babel.transform(
-            "<React.Fragment>" + inputEl.innerHTML + "</React.Fragment>",
-            {
-              presets: ["es2015", "react", "stage-0"],
-            }
-          ).code;
-
-          code =
-            code.replace(
-              /"use strict";\s*/,
-              "window." + currentName + " = function(opts) { var React = opts.React; var MT = opts.MT; return "
-            ) + " }";
-
-          outputEl.value = code;
-
-          eval(code);
-
-          targetEl.setAttribute("data-mt-data-api-render-template", currentName);
-        } catch (ex) {
-          outputEl.innerHTML = "ERROR: " + ex.message;
-        }
-      }
-      transform();
-      inputEl.addEventListener("input", function(ev) {
-        transform();
-      });
-    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"
+      integrity="sha256-FiZMk1zgTeujzf/+vomWZGZ9r00+xnGvOgXoj0Jo1jA="
+      crossorigin="anonymous"
+    ></script>
+    <script src="../dist/repl.js?hash=ce73cf1"></script>
   </body>
 </html>
