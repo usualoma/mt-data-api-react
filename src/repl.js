@@ -26,15 +26,11 @@ function _transform() {
     var code = transform(
       "<React.Fragment>" + (inputEl.value || inputEl.innerHTML) + "</React.Fragment>",
       {
-        presets: ["es2015", "react", "stage-0"],
+        presets: ["react"],
       }
     ).code;
 
-    code =
-      code.replace(
-        /"use strict";\s*/,
-        "window." + currentName + " = function(opts) { var React = opts.React; var MT = opts.MT; return "
-      ) + " }";
+    code = "window." + currentName + " = function(opts) { var React = opts.React; var MT = opts.MT; return " + code + " }";
 
     outputEl.value = code;
 
