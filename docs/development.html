@@ -96,31 +96,31 @@
 <script id="src" type="text/jsx">
 <h1>Entries</h1>
 <ul className="list-unstyled">
-  <MT.Entries limit="3">
-    <li id={<MT.EntryId />} className="media mt-3 border-bottom">
-      <MT.EntryAssets limit="1">
-        <img src={<MT.AssetThumbnailUrl width="150" />} className="mr-3" />
-      </MT.EntryAssets>
+  <mt:Entries limit="3">
+    <li id="<mt:EntryId />" className="media mt-3 border-bottom">
+      <mt:EntryAssets limit="1">
+        <img src="<mt:AssetThumbnailUrl width="150" />" className="mr-3" />
+      </mt:EntryAssets>
       <div className="media-body">
-        <a href={<MT.EntryPermalink />} className="text-body">
+        <a href="<mt:EntryPermalink />" className="text-body">
           <h5 className="mt-0 mb-1">
-            <MT.EntryTitle/>
+            <mt:EntryTitle/>
           </h5>
         </a>
         <div className="text-secondary small">
           <span className="mr-3">
-            <MT.EntryDate format="%Y.%m.%d" />
+            <mt:EntryDate format="%Y.%m.%d" />
           </span>
           <span className="mr-3">
-            <MT.EntryAuthorDisplayName />
+            <mt:EntryAuthorDisplayName />
           </span>
         </div>
         <p>
-          <MT.EntryExcerpt />
+          <mt:EntryExcerpt />
         </p>
       </div>
     </li>
-  </MT.Entries>
+  </mt:Entries>
 </ul>
 </script></textarea
           >
@@ -131,31 +131,31 @@
           <script id="template" type="text/jsx">
 <h1>Entries</h1>
 <ul className="list-unstyled">
-  <MT.Entries limit="3">
-    <li id={<MT.EntryId />} className="media mt-3 border-bottom">
-      <MT.EntryAssets limit="1">
-        <img src={<MT.AssetThumbnailUrl width="150" />} className="mr-3" />
-      </MT.EntryAssets>
+  <mt:Entries limit="3">
+    <li id="<mt:EntryId />" className="media mt-3 border-bottom">
+      <mt:EntryAssets limit="1">
+        <img src="<mt:AssetThumbnailUrl width="150" />" className="mr-3" />
+      </mt:EntryAssets>
       <div className="media-body">
-        <a href={<MT.EntryPermalink />} className="text-body">
+        <a href="<mt:EntryPermalink />" className="text-body">
           <h5 className="mt-0 mb-1">
-            <MT.EntryTitle/>
+            <mt:EntryTitle/>
           </h5>
         </a>
         <div className="text-secondary small">
           <span className="mr-3">
-            <MT.EntryDate format="%Y.%m.%d" />
+            <mt:EntryDate format="%Y.%m.%d" />
           </span>
           <span className="mr-3">
-            <MT.EntryAuthorDisplayName />
+            <mt:EntryAuthorDisplayName />
           </span>
         </div>
         <p>
-          <MT.EntryExcerpt />
+          <mt:EntryExcerpt />
         </p>
       </div>
     </li>
-  </MT.Entries>
+  </mt:Entries>
 </ul>
           </script>
         </div>

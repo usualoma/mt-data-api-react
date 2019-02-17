@@ -2,9 +2,7 @@ import md5 from "md5";
 import ReactDOM from "react-dom";
 import * as Babel from "babel-standalone";
 
-const elms = document.querySelectorAll(
-  "[data-mt-data-api-template]"
-);
+const elms = document.querySelectorAll("[data-mt-data-api-template]");
 
 (() => {
   const dataApiUrl = document.getElementById("data-api-url");
@@ -15,21 +13,29 @@ const elms = document.querySelectorAll(
     });
   };
 
-  dataApiUrl
-    .addEventListener("change", function(ev) {
-      update();
-    });
+  dataApiUrl.addEventListener("change", function(ev) {
+    update();
+  });
   update();
 })();
 
+function toReactFormat(str) {
+  return str
+    .replace(/(<\/?)mt:/g, (all, prefix) => prefix + "MT.")
+    .replace(/['"](<MT\..*?>)['"]/g, (all, tag) => `{${tag}}`)
+    .replace(/class(=['"])/, (all, assign) => `className${assign}`);
+}
+
 Array.prototype.slice.call(elms, 0).forEach(elm => {
   const inputEl = document.querySelector(elm.dataset.mtDataApiTemplate);
-  const outputEl = inputEl ? document.querySelector(inputEl.dataset.mtDataApiResult) : null;
+  const outputEl = inputEl
+    ? document.querySelector(inputEl.dataset.mtDataApiResult)
+    : null;
 
   let currentName = null;
   function transform() {
     try {
-      const inputValue = inputEl.value || inputEl.innerHTML;
+      const inputValue = toReactFormat(inputEl.value || inputEl.innerHTML);
 
       if (currentName) {
         delete window[currentName];
@@ -46,12 +52,14 @@ Array.prototype.slice.call(elms, 0).forEach(elm => {
       code =
         code.replace(
           /^("use strict";)?\s*/,
-          "window." + currentName + " = function(opts) { var React = opts.React; var MT = opts.MT; return "
+          "window." +
+            currentName +
+            " = function(opts) { var React = opts.React; var MT = opts.MT; return "
         ) + " }";
 
       if (outputEl) {
         outputEl.value = code;
-        outputEl.dataset.mtDataApiFilename = currentName + '.js';
+        outputEl.dataset.mtDataApiFilename = currentName + ".js";
       }
 
       eval(code);
