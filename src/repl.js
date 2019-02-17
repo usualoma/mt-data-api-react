@@ -1,85 +1,87 @@
 import md5 from "md5";
 import ReactDOM from "react-dom";
+import domready from "domready";
 import * as Babel from "babel-standalone";
 
-const elms = document.querySelectorAll("[data-mt-data-api-template]");
+domready(() => {
+  const elms = document.querySelectorAll("[data-mt-data-api-template]");
 
-(() => {
-  const dataApiUrl = document.getElementById("data-api-url");
+  (() => {
+    const dataApiUrl = document.getElementById("data-api-url");
 
-  if (!dataApiUrl) {
-    return;
+    if (!dataApiUrl) {
+      return;
+    }
+
+    const update = () => {
+      Array.prototype.slice.call(elms, 0).forEach(elm => {
+        ReactDOM.unmountComponentAtNode(elm);
+        elm.setAttribute("data-mt-data-api-url", dataApiUrl.value);
+      });
+    };
+
+    dataApiUrl.addEventListener("change", function(ev) {
+      update();
+    });
+    update();
+  })();
+
+  function toReactFormat(str) {
+    return str
+      .replace(/(<\/?)mt:/g, (all, prefix) => prefix + "MT.")
+      .replace(/['"](<MT\..*?>)['"]/g, (all, tag) => `{${tag}}`)
+      .replace(/class(=['"])/g, (all, assign) => `className${assign}`);
   }
 
-  const update = () => {
-    Array.prototype.slice.call(elms, 0).forEach(elm => {
-      ReactDOM.unmountComponentAtNode(elm);
-      elm.setAttribute("data-mt-data-api-url", dataApiUrl.value);
-    });
-  };
+  Array.prototype.slice.call(elms, 0).forEach(elm => {
+    const inputEl = document.querySelector(elm.dataset.mtDataApiTemplate);
+    const outputEl = inputEl
+      ? document.querySelector(inputEl.dataset.mtDataApiResult)
+      : null;
 
-  dataApiUrl.addEventListener("change", function(ev) {
-    update();
-  });
-  update();
-})();
+    let currentName = null;
+    function transform() {
+      try {
+        const inputValue = toReactFormat(inputEl.value || inputEl.innerHTML);
 
-function toReactFormat(str) {
-  return str
-    .replace(/(<\/?)mt:/g, (all, prefix) => prefix + "MT.")
-    .replace(/['"](<MT\..*?>)['"]/g, (all, tag) => `{${tag}}`)
-    .replace(/class(=['"])/g, (all, assign) => `className${assign}`);
-}
-
-Array.prototype.slice.call(elms, 0).forEach(elm => {
-  const inputEl = document.querySelector(elm.dataset.mtDataApiTemplate);
-  const outputEl = inputEl
-    ? document.querySelector(inputEl.dataset.mtDataApiResult)
-    : null;
-
-  let currentName = null;
-  function transform() {
-    try {
-      const inputValue = toReactFormat(inputEl.value || inputEl.innerHTML);
-      console.log(inputValue);
-
-      if (currentName) {
-        delete window[currentName];
-      }
-      currentName = "mtDataApiTemplate_" + md5(inputValue).substring(0, 8);
-
-      let code = Babel.transform(
-        "<React.Fragment>" + inputValue + "</React.Fragment>",
-        {
-          presets: ["es2015", "react", "stage-0"],
+        if (currentName) {
+          delete window[currentName];
         }
-      ).code;
+        currentName = "mtDataApiTemplate_" + md5(inputValue).substring(0, 8);
 
-      code =
-        code.replace(
-          /^("use strict";)?\s*/,
-          "window." +
-            currentName +
-            " = function(opts) { var React = opts.React; var MT = opts.MT; return "
-        ) + " }";
+        let code = Babel.transform(
+          "<React.Fragment>" + inputValue + "</React.Fragment>",
+          {
+            presets: ["es2015", "react", "stage-0"],
+          }
+        ).code;
 
-      if (outputEl) {
-        outputEl.value = code;
-        outputEl.dataset.mtDataApiFilename = currentName + ".js";
-      }
+        code =
+          code.replace(
+            /^("use strict";)?\s*/,
+            "window." +
+              currentName +
+              " = function(opts) { var React = opts.React; var MT = opts.MT; return "
+          ) + " }";
 
-      eval(code);
+        if (outputEl) {
+          outputEl.value = code;
+          outputEl.dataset.mtDataApiFilename = currentName + ".js";
+        }
 
-      ReactDOM.unmountComponentAtNode(elm);
-      elm.setAttribute("data-mt-data-api-template", currentName);
-    } catch (ex) {
-      if (outputEl) {
-        outputEl.innerHTML = "ERROR: " + ex.message;
+        eval(code);
+
+        ReactDOM.unmountComponentAtNode(elm);
+        elm.setAttribute("data-mt-data-api-template", currentName);
+      } catch (ex) {
+        if (outputEl) {
+          outputEl.innerHTML = "ERROR: " + ex.message;
+        }
       }
     }
-  }
-  transform();
-  inputEl.addEventListener("input", function(ev) {
     transform();
+    inputEl.addEventListener("input", function(ev) {
+      transform();
+    });
   });
 });
