@@ -6,6 +6,11 @@ const elms = document.querySelectorAll("[data-mt-data-api-template]");
 
 (() => {
   const dataApiUrl = document.getElementById("data-api-url");
+
+  if (!dataApiUrl) {
+    return;
+  }
+
   const update = () => {
     Array.prototype.slice.call(elms, 0).forEach(elm => {
       ReactDOM.unmountComponentAtNode(elm);
@@ -23,7 +28,7 @@ function toReactFormat(str) {
   return str
     .replace(/(<\/?)mt:/g, (all, prefix) => prefix + "MT.")
     .replace(/['"](<MT\..*?>)['"]/g, (all, tag) => `{${tag}}`)
-    .replace(/class(=['"])/, (all, assign) => `className${assign}`);
+    .replace(/class(=['"])/g, (all, assign) => `className${assign}`);
 }
 
 Array.prototype.slice.call(elms, 0).forEach(elm => {
@@ -36,6 +41,7 @@ Array.prototype.slice.call(elms, 0).forEach(elm => {
   function transform() {
     try {
       const inputValue = toReactFormat(inputEl.value || inputEl.innerHTML);
+      console.log(inputValue);
 
       if (currentName) {
         delete window[currentName];
