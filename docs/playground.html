@@ -53,22 +53,20 @@
     <main role="main" class="container">
       <div class="row">
         <div class="col">
-          <form>
-            <div class="form-group row">
-              <label for="data-api-url" class="col-auto col-form-label"
-                >Blog endpoint</label
-              >
-              <div class="col">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="data-api-url"
-                  placeholder="https://example.movabletype.io/.data-api/v4/sites/12345"
-                  value="https://blog-taaas-jp.movabletype.io/.data-api/v4/sites/61139"
-                />
-              </div>
+          <div class="form-group row">
+            <label for="data-api-url" class="col-auto col-form-label"
+              >Blog endpoint</label
+            >
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                id="data-api-url"
+                placeholder="e.g. https://example.movabletype.io/.data-api/v4/sites/12345"
+                value="https://blog-taaas-jp.movabletype.io/.data-api/v4/sites/61139"
+              />
             </div>
-          </form>
+          </div>
         </div>
       </div>
 
@@ -80,23 +78,35 @@
             class="form-control"
             data-mt-data-api-result="#result"
           >
-<h1>Index</h1>
+<h1>Entries</h1>
 <ul className="list-unstyled">
-  <MT.Entries>
-    <li id={(<MT.EntryId />)} className="media">
+  <MT.Entries limit="3">
+    <li id={<MT.EntryId />} className="media mt-3 border-bottom">
       <MT.EntryAssets limit="1">
-        <img src={<MT.AssetThumbnailUrl width="150" />} className="mr-3"/>
+        <img src={<MT.AssetThumbnailUrl width="150" />} className="mr-3" />
       </MT.EntryAssets>
       <div className="media-body">
-        <a href={(<MT.EntryPermalink />)} className="text-body">
-          <h5 className="mt-0 mb-1">{(<MT.EntryTitle />)}</h5>
+        <a href={<MT.EntryPermalink />} className="text-body">
+          <h5 className="mt-0 mb-1">
+            <MT.EntryTitle/>
+          </h5>
         </a>
-        <p><MT.EntryExcerpt/></p>
+        <div className="text-secondary small">
+          <span className="mr-3">
+            <MT.EntryDate format="%Y.%m.%d" />
+          </span>
+          <span className="mr-3">
+            <MT.EntryAuthorDisplayName />
+          </span>
+        </div>
+        <p>
+          <MT.EntryExcerpt />
+        </p>
       </div>
     </li>
   </MT.Entries>
-</ul></textarea
-          >
+</ul>
+          </textarea>
         </div>
 
         <div class="col-md-6">
@@ -112,8 +122,8 @@
             class="form-control"
           ></textarea>
           <a id="download">
-          <button class="btn btn-primary mt-3">Download</button>
-</a>
+            <button class="btn btn-primary mt-3">Download</button>
+          </a>
         </div>
       </div>
     </main>
@@ -127,21 +137,23 @@
     <script src="../dist/repl.js?hash=533983b"></script>
     <script>
       (function() {
-        document.getElementById("download").addEventListener("click", function(ev) {
-          var downloadElm = ev.currentTarget;
-          var resultElm = document.getElementById("result");
-          var content = resultElm.value;
-          var filename = resultElm.dataset.mtDataApiFilename;
+        document
+          .getElementById("download")
+          .addEventListener("click", function(ev) {
+            var downloadElm = ev.currentTarget;
+            var resultElm = document.getElementById("result");
+            var content = resultElm.value;
+            var filename = resultElm.dataset.mtDataApiFilename;
 
-          var blob = new Blob([content], { type: "text/plain" });
+            var blob = new Blob([content], { type: "text/plain" });
 
-          if (window.navigator.msSaveBlob) {
-            window.navigator.msSaveBlob(blob, filename);
-          } else {
-            downloadElm.setAttribute("download", filename);
-            downloadElm.href = window.URL.createObjectURL(blob);
-          }
-        });
+            if (window.navigator.msSaveBlob) {
+              window.navigator.msSaveBlob(blob, filename);
+            } else {
+              downloadElm.setAttribute("download", filename);
+              downloadElm.href = window.URL.createObjectURL(blob);
+            }
+          });
       })();
     </script>
   </body>

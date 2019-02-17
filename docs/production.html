@@ -53,22 +53,20 @@
     <main role="main" class="container">
       <div class="row">
         <div class="col">
-          <form>
-            <div class="form-group row">
-              <label for="data-api-url" class="col-auto col-form-label"
-                >Blog endpoint</label
-              >
-              <div class="col">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="data-api-url"
-                  placeholder="https://example.movabletype.io/.data-api/v4/sites/12345"
-                  value="https://blog-taaas-jp.movabletype.io/.data-api/v4/sites/61139"
-                />
-              </div>
+          <div class="form-group row">
+            <label for="data-api-url" class="col-auto col-form-label"
+              >Blog endpoint</label
+            >
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                id="data-api-url"
+                placeholder="e.g. https://example.movabletype.io/.data-api/v4/sites/12345"
+                value="https://blog-taaas-jp.movabletype.io/.data-api/v4/sites/61139"
+              />
             </div>
-          </form>
+          </div>
         </div>
       </div>
 
@@ -76,20 +74,20 @@
         <div class="col-md-6">
           <h5>1. Make MTML template.</h5>
 
+          <p>Make MTML template at development environemnt.</p>
+
+          <h5>2. Download template file as JS.</h5>
+
           <p>
-          Make MTML template at development environemnt.
+            Download compiled template file at
+            <a href="./playground.html">playground</a>.
           </p>
 
-          <h5>2. Download template file as .js.</h5>
+          <h5>3. Embed JS to your production environment.</h5>
 
           <p>
-          Download compiled template file at <a href="./playground.html">playground</a>.
-          </p>
-
-          <h5>3. Embed .js to your production environment.</h5>
-
-          <p>
-          Install the downloaded file to your production environment as follows.
+            Install the downloaded file to your production environment as
+            follows.
           </p>
 
           <textarea
@@ -108,7 +106,7 @@
         </div>
 
         <div class="col-md-6">
-          <script src="./mtDataApiTemplate_20190217064451.js"></script>
+          <script src="./mtDataApiTemplate_20190217064451.js?hash=533983b"></script>
           <div
             data-mt-data-api-template="mtDataApiTemplate_20190217064451"
           ></div>
@@ -117,8 +115,14 @@
     </main>
 
     <script src="../dist/main.js?hash=533983b"></script>
-    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.production.min.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"
+    ></script>
     <script>
       var targetEl = document.querySelector("[data-mt-data-api-template]");
       var dataApiUrlEl = document.getElementById("data-api-url");

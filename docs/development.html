@@ -53,22 +53,20 @@
     <main role="main" class="container">
       <div class="row">
         <div class="col">
-          <form>
-            <div class="form-group row">
-              <label for="data-api-url" class="col-auto col-form-label"
-                >Blog endpoint</label
-              >
-              <div class="col">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="data-api-url"
-                  placeholder="https://example.movabletype.io/.data-api/v4/sites/12345"
-                  value="https://blog-taaas-jp.movabletype.io/.data-api/v4/sites/61139"
-                />
-              </div>
+          <div class="form-group row">
+            <label for="data-api-url" class="col-auto col-form-label"
+              >Blog endpoint</label
+            >
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                id="data-api-url"
+                placeholder="e.g. https://example.movabletype.io/.data-api/v4/sites/12345"
+                value="https://blog-taaas-jp.movabletype.io/.data-api/v4/sites/61139"
+              />
             </div>
-          </form>
+          </div>
         </div>
       </div>
 
@@ -96,22 +94,34 @@
   data-mt-data-api-emplate="#src"
 ></div>
 <script id="src" type="text/jsx">
-  <h1>Index</h1>
-  <ul className="list-unstyled">
-    <MT.Entries>
-      <li id={(<MT.EntryId />)} className="media">
-        <MT.EntryAssets limit="1">
-          <img src={<MT.AssetThumbnailUrl width="150" className="mr-3" />} />
-        </MT.EntryAssets>
-        <div className="media-body">
-          <a href={(<MT.EntryPermalink />)} className="text-body">
-            <h5 className="mt-0 mb-1">{(<MT.EntryTitle />)}</h5>
-          </a>
-          <p><MT.EntryExcerpt/></p>
+<h1>Entries</h1>
+<ul className="list-unstyled">
+  <MT.Entries limit="3">
+    <li id={<MT.EntryId />} className="media mt-3 border-bottom">
+      <MT.EntryAssets limit="1">
+        <img src={<MT.AssetThumbnailUrl width="150" />} className="mr-3" />
+      </MT.EntryAssets>
+      <div className="media-body">
+        <a href={<MT.EntryPermalink />} className="text-body">
+          <h5 className="mt-0 mb-1">
+            <MT.EntryTitle/>
+          </h5>
+        </a>
+        <div className="text-secondary small">
+          <span className="mr-3">
+            <MT.EntryDate format="%Y.%m.%d" />
+          </span>
+          <span className="mr-3">
+            <MT.EntryAuthorDisplayName />
+          </span>
         </div>
-      </li>
-    </MT.Entries>
-  </ul>
+        <p>
+          <MT.EntryExcerpt />
+        </p>
+      </div>
+    </li>
+  </MT.Entries>
+</ul>
 </script></textarea
           >
         </div>
@@ -119,22 +129,34 @@
         <div class="col-md-6">
           <div data-mt-data-api-template="#template"></div>
           <script id="template" type="text/jsx">
-            <h1>Index</h1>
-            <ul className="list-unstyled">
-              <MT.Entries>
-                <li id={(<MT.EntryId />)} className="media">
-                  <MT.EntryAssets limit="1">
-                    <img src={<MT.AssetThumbnailUrl width="150" className="mr-3" />} />
-                  </MT.EntryAssets>
-                  <div className="media-body">
-                    <a href={(<MT.EntryPermalink />)} className="text-body">
-                      <h5 className="mt-0 mb-1">{(<MT.EntryTitle />)}</h5>
-                    </a>
-                    <p><MT.EntryExcerpt/></p>
-                  </div>
-                </li>
-              </MT.Entries>
-            </ul>
+<h1>Entries</h1>
+<ul className="list-unstyled">
+  <MT.Entries limit="3">
+    <li id={<MT.EntryId />} className="media mt-3 border-bottom">
+      <MT.EntryAssets limit="1">
+        <img src={<MT.AssetThumbnailUrl width="150" />} className="mr-3" />
+      </MT.EntryAssets>
+      <div className="media-body">
+        <a href={<MT.EntryPermalink />} className="text-body">
+          <h5 className="mt-0 mb-1">
+            <MT.EntryTitle/>
+          </h5>
+        </a>
+        <div className="text-secondary small">
+          <span className="mr-3">
+            <MT.EntryDate format="%Y.%m.%d" />
+          </span>
+          <span className="mr-3">
+            <MT.EntryAuthorDisplayName />
+          </span>
+        </div>
+        <p>
+          <MT.EntryExcerpt />
+        </p>
+      </div>
+    </li>
+  </MT.Entries>
+</ul>
           </script>
         </div>
       </div>
