@@ -1,0 +1,22 @@
+<h1>Entries</h1>
+<div class="row">
+  <mt:Entries limit="4">
+    <div class="col-6">
+      <div id="<mt:EntryId />" class="card mt-3">
+        <mt:EntryAssets limit="1">
+          <img src="<mt:AssetThumbnailUrl />" class="card-img-top" />
+        </mt:EntryAssets>
+        <div class="card-body">
+          <a href="<mt:EntryPermalink />" class="text-body">
+            <h5 class="card-title">
+              <mt:EntryTitle />
+            </h5>
+          </a>
+          <p class="card-text">
+            <mt:EntryExcerpt />
+          </p>
+        </div>
+      </div>
+    </div>
+  </mt:Entries>
+</div>

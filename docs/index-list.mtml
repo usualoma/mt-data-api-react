@@ -1,0 +1,28 @@
+<h1>Entries</h1>
+<ul class="list-unstyled">
+  <mt:Entries>
+    <li id="<mt:EntryId />" class="media mt-3 border-bottom">
+      <mt:EntryAssets limit="1">
+        <img src="<mt:AssetThumbnailUrl width="150" />" class="mr-3" />
+      </mt:EntryAssets>
+      <div class="media-body">
+        <a href="<mt:EntryPermalink />" class="text-body">
+          <h5 class="mt-0 mb-1">
+            <mt:EntryTitle/>
+          </h5>
+        </a>
+        <div class="text-secondary small">
+          <span class="mr-3">
+            <mt:EntryDate format="%Y.%m.%d" />
+          </span>
+          <span class="mr-3">
+            <mt:EntryAuthorDisplayName />
+          </span>
+        </div>
+        <p>
+          <mt:EntryExcerpt />
+        </p>
+      </div>
+    </li>
+  </mt:Entries>
+</ul>
