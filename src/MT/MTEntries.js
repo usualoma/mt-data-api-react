@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import URI from "urijs";
 import MT from "../MT";
 
 class MTEntries extends MT.Component {
@@ -12,7 +13,11 @@ class MTEntries extends MT.Component {
 
   componentDidMount() {
     const c = { apiUrl: MT.apiUrl };
-    axios(`${c.apiUrl}/entries`).then(({ data }) => {
+    const url = new URI(`${c.apiUrl}/entries`);
+    if (this.props.limit) {
+      url.addQuery("limit", this.props.limit);
+    }
+    axios(url.toString()).then(({ data }) => {
       this.setState({ data: data });
     });
   }

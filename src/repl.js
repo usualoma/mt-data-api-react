@@ -1,47 +1,68 @@
 import moment from "moment";
-import {transform} from "@babel/standalone";
+import ReactDOM from "react-dom";
+//import * as Babel from "babel-standalone";
 
-var inputEl = document.getElementById("template");
-var outputEl = document.getElementById("result");
-var targetEl = document.querySelector(
-  "[data-mt-data-api-render-template]"
+const elms = document.querySelectorAll(
+  "[data-mt-data-api-template]"
 );
 
-var dataApiUrlEl = document.getElementById("data-api-url");
-dataApiUrlEl
-  .addEventListener("change", function(ev) {
-    targetEl.setAttribute("data-api-url", dataApiUrlEl.value);
-  });
-targetEl.setAttribute("data-api-url", dataApiUrlEl.value);
+(() => {
+  const dataApiUrl = document.getElementById("data-api-url");
+  const update = () => {
+    Array.prototype.slice.call(elms, 0).forEach(elm => {
+      elm.setAttribute("data-api-url", dataApiUrl.value);
+    });
+  };
 
-var currentName = null;
-function _transform() {
-  try {
-    if (currentName) {
-      delete window[currentName];
-    }
-    currentName =
-      "mtDataApiTemplate_" + moment().format("YYYYMMDDhhmmss");
+  dataApiUrl
+    .addEventListener("change", function(ev) {
+      update();
+    });
+  update();
+})();
 
-    var code = transform(
-      "<React.Fragment>" + (inputEl.value || inputEl.innerHTML) + "</React.Fragment>",
-      {
-        presets: ["react"],
+Array.prototype.slice.call(elms, 0).forEach(elm => {
+  const inputEl = document.querySelector(elm.dataset.mtDataApiTemplate);
+  const outputEl = inputEl ? document.querySelector(inputEl.dataset.mtDataApiResult) : null;
+
+  let currentName = null;
+  function transform() {
+    try {
+      if (currentName) {
+        delete window[currentName];
       }
-    ).code;
+      currentName =
+        "mtDataApiTemplate_" + moment().format("YYYYMMDDhhmmss");
 
-    code = "window." + currentName + " = function(opts) { var React = opts.React; var MT = opts.MT; return " + code + " }";
+      let code = Babel.transform(
+        "<React.Fragment>" + (inputEl.value || inputEl.innerHTML) + "</React.Fragment>",
+        {
+          presets: ["es2015", "react", "stage-0"],
+        }
+      ).code;
 
-    outputEl.value = code;
+      code =
+        code.replace(
+          /^("use strict";)?\s*/,
+          "window." + currentName + " = function(opts) { var React = opts.React; var MT = opts.MT; return "
+        ) + " }";
 
-    eval(code);
+      if (outputEl) {
+        outputEl.value = code;
+      }
 
-    targetEl.setAttribute("data-mt-data-api-render-template", currentName);
-  } catch (ex) {
-    outputEl.innerHTML = "ERROR: " + ex.message;
+      eval(code);
+
+      ReactDOM.unmountComponentAtNode(elm);
+      elm.setAttribute("data-mt-data-api-template", currentName);
+    } catch (ex) {
+      if (outputEl) {
+        outputEl.innerHTML = "ERROR: " + ex.message;
+      }
+    }
   }
-}
-_transform();
-inputEl.addEventListener("input", function(ev) {
-  _transform();
+  transform();
+  inputEl.addEventListener("input", function(ev) {
+    transform();
+  });
 });

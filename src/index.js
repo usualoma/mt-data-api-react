@@ -9,10 +9,10 @@ domready(() => {
     return;
   }
 
-  const elms = document.querySelectorAll("[data-mt-data-api-render-template]");
+  const elms = document.querySelectorAll("[data-mt-data-api-template]");
   Array.prototype.slice.call(elms, 0).forEach(elm => {
     const render = () => {
-      const getElements = global[elm.dataset.mtDataApiRenderTemplate];
+      const getElements = global[elm.dataset.mtDataApiTemplate];
 
       if (typeof getElements !== "function") {
         return;

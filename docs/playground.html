@@ -74,7 +74,12 @@
 
       <div class="row">
         <div class="col-md-6">
-          <textarea id="template" style="height: 500px" class="form-control">
+          <textarea
+            id="template"
+            style="height: 500px"
+            class="form-control"
+            data-mt-data-api-result="#result"
+          >
 <h1>Index</h1>
 <ul className="list-unstyled">
   <MT.Entries>
@@ -95,7 +100,7 @@
         </div>
 
         <div class="col-md-6">
-          <div data-mt-data-api-render-template=""></div>
+          <div data-mt-data-api-template="#template"></div>
         </div>
       </div>
 
@@ -106,6 +111,9 @@
             style="height: 10em"
             class="form-control"
           ></textarea>
+          <a id="download" download="xxx">
+          <button class="btn btn-primary mt-3">Download</button>
+</a>
         </div>
       </div>
     </main>
@@ -117,5 +125,21 @@
       crossorigin="anonymous"
     ></script>
     <script src="../dist/repl.js?hash=b9f724a"></script>
+    <script>
+      (function() {
+        document.getElementById("download").addEventListener("click", function(ev) {
+          var content = document.getElementById("result").value;
+          var blob = new Blob([content], { type: "text/plain" });
+
+          if (window.navigator.msSaveBlob) {
+            window.navigator.msSaveBlob(blob, "test.txt");
+          } else {
+            document.getElementById(
+              "download"
+            ).href = window.URL.createObjectURL(blob);
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

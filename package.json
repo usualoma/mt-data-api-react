@@ -8,7 +8,8 @@
     "moment": "^2.24.0",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
-    "react-scripts": "2.1.5"
+    "react-scripts": "2.1.5",
+    "urijs": "^1.19.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -26,7 +27,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@babel/standalone": "^7.3.3",
+    "babel-standalone": "^6.26.0",
     "webpack-cli": "^3.2.3"
   }
 }
