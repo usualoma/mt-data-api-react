@@ -36,12 +36,12 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="./playground.html"
-              >Payground</a
-            >
+            <a class="nav-link" href="./playground.html">Payground</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="./development.html">Development <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="./development.html"
+              >Development <span class="sr-only">(current)</span></a
+            >
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./production.html">Production</a>
@@ -56,7 +56,7 @@
           <form>
             <div class="form-group row">
               <label for="data-api-url" class="col-auto col-form-label"
-                >Data API URL</label
+                >Blog endpoint</label
               >
               <div class="col">
                 <input
@@ -64,7 +64,7 @@
                   class="form-control"
                   id="data-api-url"
                   placeholder="https://example.movabletype.io/.data-api/v4/sites/12345"
-                  value="https://tamano-20181219.movabletype.io/.data-api/v4/sites/60293"
+                  value="https://blog-taaas-jp.movabletype.io/.data-api/v4/sites/61139"
                 />
               </div>
             </div>
@@ -74,53 +74,68 @@
 
       <div class="row">
         <div class="col-md-6">
-          <textarea style="height: 500px" class="form-control">
+          <h5>1. Render MTML template with the Data API, for development.</h5>
+
+          <p>
+            You can render MTML template with the Data API, by embeddingas
+            follows. This way is suitable for trial and error during
+            development, but has poor performance, so it can not be used in
+            production.
+          </p>
+
+          <textarea
+            style="height: 600px; scroll-y: auto"
+            wrap="off"
+            class="form-control"
+            readonly
+          >
 <script src="https://cdn.jsdelivr.net/gh/usualoma/mt-data-api-react@b9f724a/dist/main.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/usualoma/mt-data-api-react@b9f724a/dist/repl.js?hash=b9f724a"></script>
-
-<div data-api-url="" data-mt-data-api-emplate="#src"></div>
+<div
+  data-mt-data-api-url="https://tamano-20181219.movabletype.io/.data-api/v4/sites/60293"
+  data-mt-data-api-emplate="#src"
+></div>
 <script id="src" type="text/jsx">
-<h1>Index</h1>
-<ul className="list-unstyled">
-  <MT.Entries>
-    <li id={(<MT.EntryId />)} className="media">
-      <MT.EntryAssets limit="1">
-        <img src={<MT.AssetThumbnailUrl width="200" />} />
-      </MT.EntryAssets>
-      <div className="media-body">
-        <a href={(<MT.EntryPermalink />)} className="text-body">
-          <h5 className="mt-0 mb-1">{(<MT.EntryTitle />)}</h5>
-        </a>
-        <p><MT.EntryExcerpt/></p>
-      </div>
-    </li>
-  </MT.Entries>
-</ul>
-</script>
-</textarea>
-
+  <h1>Index</h1>
+  <ul className="list-unstyled">
+    <MT.Entries>
+      <li id={(<MT.EntryId />)} className="media">
+        <MT.EntryAssets limit="1">
+          <img src={<MT.AssetThumbnailUrl width="150" className="mr-3" />} />
+        </MT.EntryAssets>
+        <div className="media-body">
+          <a href={(<MT.EntryPermalink />)} className="text-body">
+            <h5 className="mt-0 mb-1">{(<MT.EntryTitle />)}</h5>
+          </a>
+          <p><MT.EntryExcerpt/></p>
+        </div>
+      </li>
+    </MT.Entries>
+  </ul>
+</script></textarea
+          >
         </div>
 
         <div class="col-md-6">
           <div data-mt-data-api-template="#template"></div>
-<script id="template" type="text/jsx">
-<h1>Index</h1>
-<ul className="list-unstyled">
-  <MT.Entries>
-    <li id={(<MT.EntryId />)} className="media">
-      <MT.EntryAssets limit="1">
-        <img src={<MT.AssetThumbnailUrl width="200" />} />
-      </MT.EntryAssets>
-      <div className="media-body">
-        <a href={(<MT.EntryPermalink />)} className="text-body">
-          <h5 className="mt-0 mb-1">{(<MT.EntryTitle />)}</h5>
-        </a>
-        <p><MT.EntryExcerpt/></p>
-      </div>
-    </li>
-  </MT.Entries>
-</ul>
-</script>
+          <script id="template" type="text/jsx">
+            <h1>Index</h1>
+            <ul className="list-unstyled">
+              <MT.Entries>
+                <li id={(<MT.EntryId />)} className="media">
+                  <MT.EntryAssets limit="1">
+                    <img src={<MT.AssetThumbnailUrl width="150" className="mr-3" />} />
+                  </MT.EntryAssets>
+                  <div className="media-body">
+                    <a href={(<MT.EntryPermalink />)} className="text-body">
+                      <h5 className="mt-0 mb-1">{(<MT.EntryTitle />)}</h5>
+                    </a>
+                    <p><MT.EntryExcerpt/></p>
+                  </div>
+                </li>
+              </MT.Entries>
+            </ul>
+          </script>
         </div>
       </div>
     </main>

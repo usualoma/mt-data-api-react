@@ -7,7 +7,8 @@ window.mtDataApiTemplate_20190217064451 = function(opts) { var React = opts.Reac
   limit: "1"
 }, React.createElement("img", {
   src: React.createElement(MT.AssetThumbnailUrl, {
-    width: "200"
+    width: "150",
+    className: "mr-3"
   })
 })), React.createElement("div", {
   className: "media-body"

@@ -56,7 +56,7 @@
           <form>
             <div class="form-group row">
               <label for="data-api-url" class="col-auto col-form-label"
-                >Data API URL</label
+                >Blog endpoint</label
               >
               <div class="col">
                 <input
@@ -64,7 +64,7 @@
                   class="form-control"
                   id="data-api-url"
                   placeholder="https://example.movabletype.io/.data-api/v4/sites/12345"
-                  value="https://tamano-20181219.movabletype.io/.data-api/v4/sites/60293"
+                  value="https://blog-taaas-jp.movabletype.io/.data-api/v4/sites/61139"
                 />
               </div>
             </div>
@@ -85,7 +85,7 @@
   <MT.Entries>
     <li id={(<MT.EntryId />)} className="media">
       <MT.EntryAssets limit="1">
-        <img src={<MT.AssetThumbnailUrl width="200" />} />
+        <img src={<MT.AssetThumbnailUrl width="150" />} className="mr-3"/>
       </MT.EntryAssets>
       <div className="media-body">
         <a href={(<MT.EntryPermalink />)} className="text-body">
@@ -111,7 +111,7 @@
             style="height: 10em"
             class="form-control"
           ></textarea>
-          <a id="download" download="xxx">
+          <a id="download">
           <button class="btn btn-primary mt-3">Download</button>
 </a>
         </div>
@@ -128,15 +128,18 @@
     <script>
       (function() {
         document.getElementById("download").addEventListener("click", function(ev) {
-          var content = document.getElementById("result").value;
+          var downloadElm = ev.currentTarget;
+          var resultElm = document.getElementById("result");
+          var content = resultElm.value;
+          var filename = resultElm.dataset.mtDataApiFilename;
+
           var blob = new Blob([content], { type: "text/plain" });
 
           if (window.navigator.msSaveBlob) {
-            window.navigator.msSaveBlob(blob, "test.txt");
+            window.navigator.msSaveBlob(blob, filename);
           } else {
-            document.getElementById(
-              "download"
-            ).href = window.URL.createObjectURL(blob);
+            downloadElm.setAttribute("download", filename);
+            downloadElm.href = window.URL.createObjectURL(blob);
           }
         });
       })();

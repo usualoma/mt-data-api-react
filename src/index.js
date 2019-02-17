@@ -18,7 +18,7 @@ domready(() => {
         return;
       }
 
-      const apiUrl = elm.dataset.apiUrl;
+      const apiUrl = elm.dataset.mtDataApiUrl;
 
       if (!apiUrl) {
         return;

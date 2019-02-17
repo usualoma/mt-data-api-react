@@ -1,6 +1,6 @@
-import moment from "moment";
+import md5 from "md5";
 import ReactDOM from "react-dom";
-//import * as Babel from "babel-standalone";
+import * as Babel from "babel-standalone";
 
 const elms = document.querySelectorAll(
   "[data-mt-data-api-template]"
@@ -10,7 +10,8 @@ const elms = document.querySelectorAll(
   const dataApiUrl = document.getElementById("data-api-url");
   const update = () => {
     Array.prototype.slice.call(elms, 0).forEach(elm => {
-      elm.setAttribute("data-api-url", dataApiUrl.value);
+      ReactDOM.unmountComponentAtNode(elm);
+      elm.setAttribute("data-mt-data-api-url", dataApiUrl.value);
     });
   };
 
@@ -28,14 +29,15 @@ Array.prototype.slice.call(elms, 0).forEach(elm => {
   let currentName = null;
   function transform() {
     try {
+      const inputValue = inputEl.value || inputEl.innerHTML;
+
       if (currentName) {
         delete window[currentName];
       }
-      currentName =
-        "mtDataApiTemplate_" + moment().format("YYYYMMDDhhmmss");
+      currentName = "mtDataApiTemplate_" + md5(inputValue).substring(0, 8);
 
       let code = Babel.transform(
-        "<React.Fragment>" + (inputEl.value || inputEl.innerHTML) + "</React.Fragment>",
+        "<React.Fragment>" + inputValue + "</React.Fragment>",
         {
           presets: ["es2015", "react", "stage-0"],
         }
@@ -49,6 +51,7 @@ Array.prototype.slice.call(elms, 0).forEach(elm => {
 
       if (outputEl) {
         outputEl.value = code;
+        outputEl.dataset.mtDataApiFilename = currentName + '.js';
       }
 
       eval(code);
