@@ -87,8 +87,16 @@
             class="form-control"
             readonly
           >
-<script src="https://cdn.jsdelivr.net/gh/usualoma/mt-data-api-react@v0.0.2/dist/main.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/usualoma/mt-data-api-react@v0.0.2/dist/repl.js?hash=v0.0.2"></script>
+<script
+  src="https://cdn.jsdelivr.net/gh/usualoma/mt-data-api-react@v0.0.2/dist/main.js"
+	integrity="sha384-OakuDst8X1pATGUtpccbF3n/EfhWyBe4wWN44tmWS5Ztm8y4IwHGcfNqi2TiwqqL"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdn.jsdelivr.net/gh/usualoma/mt-data-api-react@v0.0.2/dist/repl.js"
+	integrity="sha384-3pPH2wIFunivZQ0xPT0hiYQSQiaYUV8Oo2Xm+iqU0O5QoYRDf7IRYjy3MyJf1aCq"
+  crossorigin="anonymous"
+></script>
 <div
   data-mt-data-api-url="https://blog-taaas-jp.movabletype.io/.data-api/v4/sites/61139"
   data-mt-data-api-emplate="#src"
@@ -129,34 +137,34 @@
         <div class="col-md-6">
           <div data-mt-data-api-template="#template"></div>
           <script id="template" type="text/jsx">
-<h1>Entries</h1>
-<ul class="list-unstyled">
-  <mt:Entries limit="3">
-    <li id="<mt:EntryId />" class="media mt-3 border-bottom">
-      <mt:EntryAssets limit="1">
-        <img src="<mt:AssetThumbnailUrl width="150" />" class="mr-3" />
-      </mt:EntryAssets>
-      <div class="media-body">
-        <a href="<mt:EntryPermalink />" class="text-body">
-          <h5 class="mt-0 mb-1">
-            <mt:EntryTitle/>
-          </h5>
-        </a>
-        <div class="text-secondary small">
-          <span class="mr-3">
-            <mt:EntryDate format="%Y.%m.%d" />
-          </span>
-          <span class="mr-3">
-            <mt:EntryAuthorDisplayName />
-          </span>
-        </div>
-        <p>
-          <mt:EntryExcerpt />
-        </p>
-      </div>
-    </li>
-  </mt:Entries>
-</ul>
+            <h1>Entries</h1>
+            <ul class="list-unstyled">
+              <mt:Entries limit="3">
+                <li id="<mt:EntryId />" class="media mt-3 border-bottom">
+                  <mt:EntryAssets limit="1">
+                    <img src="<mt:AssetThumbnailUrl width="150" />" class="mr-3" />
+                  </mt:EntryAssets>
+                  <div class="media-body">
+                    <a href="<mt:EntryPermalink />" class="text-body">
+                      <h5 class="mt-0 mb-1">
+                        <mt:EntryTitle/>
+                      </h5>
+                    </a>
+                    <div class="text-secondary small">
+                      <span class="mr-3">
+                        <mt:EntryDate format="%Y.%m.%d" />
+                      </span>
+                      <span class="mr-3">
+                        <mt:EntryAuthorDisplayName />
+                      </span>
+                    </div>
+                    <p>
+                      <mt:EntryExcerpt />
+                    </p>
+                  </div>
+                </li>
+              </mt:Entries>
+            </ul>
           </script>
         </div>
       </div>
