@@ -1,5 +1,7 @@
+.PHONY: build
+
 build:
-	npx webpack
+	NODE_ENV=production npx webpack
 
 update-hash: H:=$(shell git rev-parse --short HEAD)
 update-hash:
