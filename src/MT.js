@@ -1,5 +1,4 @@
-import React, { createContext } from "react";
-import ReactDOM from "react-dom";
+import { h, render, createContext } from 'preact';
 import Component from "./MT/Component";
 
 function MT({ children, apiUrl }) {
@@ -12,7 +11,7 @@ function MT({ children, apiUrl }) {
 }
 
 MT.render = (reactElements, rootProps, element) => {
-  ReactDOM.render(<MT {...rootProps}>{reactElements}</MT>, element);
+  render(<MT {...rootProps}>{reactElements}</MT>, element);
 };
 
 MT.Component = Component;

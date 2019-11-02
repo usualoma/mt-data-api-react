@@ -1,16 +1,14 @@
 {
   "name": "mt-data-api-react",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "domready": "^1.0.8",
     "md5": "^2.2.1",
     "moment": "^2.24.0",
     "moment-strftime": "^0.5.0",
-    "react": "^16.8.1",
-    "react-dom": "^16.8.1",
-    "react-scripts": "2.1.5",
+    "preact": "^10.0.4",
     "urijs": "^1.19.1"
   },
   "scripts": {
@@ -30,6 +28,7 @@
   ],
   "devDependencies": {
     "babel-standalone": "^6.26.0",
+    "react-scripts": "^3.2.0",
     "webpack-cli": "^3.2.3"
   }
 }

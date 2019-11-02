@@ -1,5 +1,6 @@
 import axios from "axios";
-import React, {useState, useEffect} from "react";
+import { h } from "preact";
+import { useState, useEffect } from "preact/hooks";
 import URI from "urijs";
 import MT from "../MT";
 

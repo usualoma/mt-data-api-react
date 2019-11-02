@@ -1,8 +1,8 @@
 module.exports = {
   mode: "production",
   entry: {
-    main: './src/index.js',
-    repl: './src/repl.js'
+    main: "./src/index.js",
+    repl: "./src/repl.js",
   },
   module: {
     rules: [
@@ -23,6 +23,7 @@ module.exports = {
                 ],
                 "@babel/preset-react",
               ],
+              plugins: [["@babel/plugin-transform-react-jsx", { pragma: "h" }]],
             },
           },
         ],

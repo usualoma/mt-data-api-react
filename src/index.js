@@ -1,5 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import { h, render as reactRender, createElement, Fragment } from "preact";
 import domready from "domready";
 import MT from "./MT";
 import "./MT/Tags";
@@ -24,11 +23,11 @@ domready(() => {
         return;
       }
 
-      ReactDOM.render(
+      reactRender(
         <MT apiUrl={apiUrl}>
           {getElements({
             MT,
-            React,
+            React: { createElement, Fragment },
           })}
         </MT>,
         elm

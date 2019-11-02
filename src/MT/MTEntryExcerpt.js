@@ -1,4 +1,4 @@
-import React from "react";
+import { h } from 'preact';
 import MT from "../MT";
 
 class MTEntryExcerpt extends MT.Component {

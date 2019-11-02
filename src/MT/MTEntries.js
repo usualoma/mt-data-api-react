@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import { h } from 'preact';
 import URI from "urijs";
 import MT from "../MT";
 

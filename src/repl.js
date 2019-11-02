@@ -1,5 +1,5 @@
 import md5 from "md5";
-import ReactDOM from "react-dom";
+import {unmountComponentAtNode} from "preact/compat";
 import domready from "domready";
 import * as Babel from "babel-standalone";
 
@@ -15,7 +15,7 @@ domready(() => {
 
     const update = () => {
       Array.prototype.slice.call(elms, 0).forEach(elm => {
-        ReactDOM.unmountComponentAtNode(elm);
+        unmountComponentAtNode(elm);
         elm.setAttribute("data-mt-data-api-url", dataApiUrl.value);
       });
     };
@@ -71,7 +71,7 @@ domready(() => {
 
         eval(code);
 
-        ReactDOM.unmountComponentAtNode(elm);
+        unmountComponentAtNode(elm);
         elm.setAttribute("data-mt-data-api-template", currentName);
       } catch (ex) {
         if (outputEl) {

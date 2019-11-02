@@ -1,14 +1,19 @@
-import React from "react";
+import { h, isValidElement, cloneElement, Component as ReactComponent} from 'preact';
 import MT from "../MT";
 
 function recursiveMap(children, fn) {
-  return React.Children.map(children, child => {
-    if (!React.isValidElement(child)) {
+  // FIXME:
+  if (!children.map) {
+    children = [children];
+  }
+
+  return children.map(child => {
+    if (!isValidElement(child)) {
       return child;
     }
 
     if (child.props.children) {
-      child = React.cloneElement(child, {
+      child = cloneElement(child, {
         children: recursiveMap(child.props.children, fn),
       });
     }
@@ -17,7 +22,7 @@ function recursiveMap(children, fn) {
   });
 }
 
-class Component extends React.Component {
+class Component extends ReactComponent {
   resolveAttribute(children) {
     return recursiveMap(children, (child) => {
       switch (typeof child) {
@@ -41,8 +46,8 @@ class Component extends React.Component {
             return child;
           }
 
-          return React.cloneElement(wrap, {render: (c) => {
-            return React.cloneElement(child, {[wrapk]: c});
+          return cloneElement(wrap, {render: (c) => {
+            return cloneElement(child, {[wrapk]: c});
           }});
     
         default:
