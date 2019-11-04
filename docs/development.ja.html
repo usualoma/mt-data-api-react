@@ -16,7 +16,7 @@
       crossorigin="anonymous"
     />
 
-    <title>Development - MT Data API React</title>
+    <title>開発 - MT Data API React</title>
   </head>
   <body style="padding-top: 5em">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -36,26 +36,26 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="./playground.html">Payground</a>
+            <a class="nav-link" href="./playground.ja.html">プレイグラウンド</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="./development.html"
-              >Development <span class="sr-only">(current)</span></a
+            <a class="nav-link" href="./development.ja.html"
+              >開発環境<span class="sr-only">(current)</span></a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./production.html">Production</a>
+            <a class="nav-link" href="./production.ja.html">本番環境</a>
           </li>
         </ul>
 
         <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="./development.html"
-              >English <span class="sr-only">(current)</span></a
-            >
-          </li>
           <li class="nav-item">
-            <a class="nav-link" href="./development.ja.html">日本語</a>
+            <a class="nav-link" href="./development.html">English</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="./development.ja.html"
+              >日本語 <span class="sr-only">(current)</span></a
+            >
           </li>
         </ul>
       </div>
@@ -66,7 +66,7 @@
         <div class="col">
           <div class="form-group row">
             <label for="data-api-url" class="col-auto col-form-label"
-              >Blog endpoint</label
+              >ブログのエンドポイント</label
             >
             <div class="col">
               <input
@@ -83,13 +83,11 @@
 
       <div class="row">
         <div class="col-md-6">
-          <h5>Render MTML template with the Data API, for development.</h5>
+          <h5>Data APIで取得したデータをMTMLテンプレートで表示する</h5>
 
           <p>
-            You can render MTML template with the Data API, by embeddingas
-            follows. This way is suitable for trial and error during
-            development, but has poor performance, so it can not be used in
-            production.
+            以下のような書き方で、Data
+            APIで取得したデータをMTMLテンプレートで表示することができます。この方法は開発中の試行錯誤には適していますが、ダウンロードのサイズも大きく速度も遅いため、本番環境での使用には向いていません。
           </p>
 
           <textarea
@@ -115,7 +113,7 @@
   data-mt-data-api-template="#src"
 ></div>
 <script id="src" type="text/mtml">
-<h1>Entries</h1>
+<h1>新着記事</h1>
 <ul class="list-unstyled">
   <mt:Entries limit="3">
     <li id="<mt:EntryId />" class="media mt-3 border-bottom">
@@ -150,7 +148,7 @@
         <div class="col-md-6">
           <div data-mt-data-api-template="#template"></div>
           <script id="template" type="text/mtml">
-            <h1>Entries</h1>
+            <h1>新着記事</h1>
             <ul class="list-unstyled">
               <mt:Entries limit="3">
                 <li id="<mt:EntryId />" class="media mt-3 border-bottom">
