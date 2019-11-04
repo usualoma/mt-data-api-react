@@ -1,6 +1,6 @@
 # MT Data API React.
 
-This tool render contents retrieved via the Data API, with MTML template.
+This tool enables you to render contents retrieved via the Data API, with MTML template.
 
 ## Screenshot
 
