@@ -59,7 +59,7 @@
     "ts-pnp": "1.1.4",
     "urijs": "^1.19.1",
     "url-loader": "^4.1.1",
-    "webpack": "^5.100.2",
+    "webpack": "^5.104.1",
     "webpack-dev-server": "5.2.2",
     "webpack-manifest-plugin": "2.1.1",
     "workbox-webpack-plugin": "^7.3.0"
